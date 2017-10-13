@@ -120,7 +120,9 @@ const authenticate = (username, password, userPool, config, dispatch) =>
       Pool: userPool,
     });
 
-    user.authenticateUser(creds, {
+      dispatch(Action.startAuthentication());
+
+      user.authenticateUser(creds, {
       onSuccess: () => {
         dispatch(Action.authenticated(user));
         resolve();

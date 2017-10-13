@@ -8,6 +8,10 @@ const Action = {
     config,
   }),
 
+  startAuthentication: () => ({
+      type: 'COGNITO_AUTHENTICATING'
+  }),
+
   authenticated: user => ({
     type: 'COGNITO_AUTHENTICATED',
     user,

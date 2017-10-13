@@ -2,6 +2,7 @@
 /** states stored in store.cognito.state */
 export const CognitoState = {
   LOGGED_OUT: 'LOGGED_OUT',
+  AUTHENTICATING: 'AUTHENTICATING',
   AUTHENTICATED: 'AUTHENTICATED',
   LOGGING_IN: 'LOGGING_IN',
   LOGGED_IN: 'LOGGED_IN',

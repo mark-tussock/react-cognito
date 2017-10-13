@@ -60,6 +60,11 @@ export const cognito = (state = initial, action) => {
     case 'COGNITO_CONFIGURE':
       return configure(state, action);
 
+    case 'COGNITO_AUTHENTICATING':
+        return Object.assign({}, state, {
+            state: CognitoState.AUTHENTICATING,
+        });
+
     case 'COGNITO_AUTHENTICATED':
       return Object.assign({}, state, {
         user: action.user,
