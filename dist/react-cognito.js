@@ -311,6 +311,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    case 'COGNITO_CONFIGURE':
 	      return configure(state, action);
 	
+	    case 'COGNITO_AUTHENTICATING':
+	      return Object.assign({}, state, {
+	        state: _states.CognitoState.AUTHENTICATING
+	      });
+	
 	    case 'COGNITO_AUTHENTICATED':
 	      return Object.assign({}, state, {
 	        user: action.user,
@@ -470,6 +475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/** states stored in store.cognito.state */
 	var CognitoState = exports.CognitoState = {
 	  LOGGED_OUT: 'LOGGED_OUT',
+	  AUTHENTICATING: 'AUTHENTICATING',
 	  AUTHENTICATED: 'AUTHENTICATED',
 	  LOGGING_IN: 'LOGGING_IN',
 	  LOGGED_IN: 'LOGGED_IN',
@@ -500,6 +506,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	      type: 'COGNITO_CONFIGURE',
 	      config: config
+	    };
+	  },
+	
+	  startAuthentication: function startAuthentication() {
+	    return {
+	      type: 'COGNITO_AUTHENTICATING'
 	    };
 	  },
 	
@@ -933,6 +945,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      Username: username,
 	      Pool: userPool
 	    });
+	
+	    dispatch(_actions.Action.startAuthentication());
 	
 	    user.authenticateUser(creds, {
 	      onSuccess: function onSuccess() {
